@@ -147,10 +147,13 @@ export default class MPXProxy {
 
   initState () {
     const options = this.options
+    console.log('options', options)
     const proxyedKeys = this.initData(options.data, options.dataFn)
     const proxyedKeysMap = makeMap(proxyedKeys)
     this.initComputed(options.computed)
     // target的数据访问代理到将proxy的data
+    console.log('this.target', this.target)
+    console.log('this.data', this.data)
     proxy(this.target, this.data, undefined, undefined, (key) => {
       if (this.ignoreProxyMap[key]) {
         error(`The data/props/computed key [${key}] is a reserved keyword of miniprogram, please check and rename it!`, this.options.mpxFileResource)
@@ -197,6 +200,7 @@ export default class MPXProxy {
     // mpxCid 解决支付宝环境selector为全局问题
     this.data.mpxCid = this.uid
     this.localKeysMap.mpxCid = true
+    console.log('initDatathis.data', this.data)
     observe(this.data, true)
     return proxyedKeys
   }
@@ -277,6 +281,7 @@ export default class MPXProxy {
   }
 
   processRenderDataWithStrictDiff (renderData) {
+    console.log('processRenderDataWithStrictDiff', renderData)
     const result = {}
     for (let key in renderData) {
       if (hasOwn(renderData, key)) {
@@ -358,6 +363,7 @@ export default class MPXProxy {
         }
       }
     }
+    console.log('processRenderDataWithStrictDiff2', result)
     return result
   }
 
@@ -403,6 +409,9 @@ export default class MPXProxy {
       } catch (e) {
       }
     }
+    console.log('doRender1', this)
+    console.log('doRender2', data)
+    console.log('doRender3', callback)
     this.target.__render(data, callback)
   }
 

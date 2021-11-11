@@ -99,6 +99,7 @@ export function getDefaultOptions (type, { rawOptions = {}, currentInject }) {
   const rootMixins = [{
     [hookNames[0]] (...params) {
       if (!this.__mpxProxy) {
+        console.log('getDefaultOptions', this)
         initProxy(this, rawOptions, currentInject, params)
       }
     },

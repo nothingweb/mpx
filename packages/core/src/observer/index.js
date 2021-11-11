@@ -28,6 +28,8 @@ export class Observer {
     this.value = value
     this.dep = new Dep()
     this.vmCount = 0
+    console.log('observer1', value)
+    console.log('observer2', this)
     def(value, '__ob__', this)
     if (Array.isArray(value)) {
       const augment = hasProto && arrayProtoAugment

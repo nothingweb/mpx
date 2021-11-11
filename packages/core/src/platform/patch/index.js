@@ -50,6 +50,8 @@ export default function createFactory (type) {
     }
 
     const { rawOptions, currentInject } = transferOptions(options, type)
+    console.log('rawOptions', rawOptions)
+    console.log('currentInject', currentInject)
     // 注入内建的mixins, 内建mixin是按原始平台编写的，所以合并规则和rootMixins保持一致
     // 将合并后的用户定义的rawOptions传入获取当前应该注入的内建mixins
     rawOptions.mixins = getBuiltInMixins(rawOptions, type)
